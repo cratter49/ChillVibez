@@ -4,7 +4,11 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.util.Log;
+import android.content.Intent;
 
+import com.thalmic.myo.Hub;
+import com.thalmic.myo.scanner.ScanActivity;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -12,6 +16,14 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Hub hub = Hub.getInstance();
+        if (!hub.init(this)) {
+            finish();
+            return;
+        }
+
+        Intent intent = new Intent(this, ScanActivity.class);
+        this.startActivity(intent);
     }
 
 
